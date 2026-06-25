@@ -1,567 +1,76 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fake News: Entenda, Identifique e Combata a Desinformação</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#f5f7fa;
-    color:#222;
-    line-height:1.8;
-}
-
-header{
-    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
-    color:white;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:40px;
-}
-
-.hero{
-    max-width:1000px;
-}
-
-.hero h1{
-    font-size:4rem;
-    margin-bottom:20px;
-}
-
-.hero p{
-    font-size:1.3rem;
-    margin-bottom:30px;
-}
-
-.btn{
-    display:inline-block;
-    background:#ef4444;
-    color:white;
-    text-decoration:none;
-    padding:15px 35px;
-    border-radius:30px;
-    transition:0.3s;
-    font-weight:bold;
-}
-
-.btn:hover{
-    background:#dc2626;
-    transform:translateY(-3px);
-}
-
-nav{
-    background:#111827;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-nav ul{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    list-style:none;
-}
-
-nav ul li a{
-    display:block;
-    color:white;
-    text-decoration:none;
-    padding:18px;
-    transition:.3s;
-}
-
-nav ul li a:hover{
-    background:#ef4444;
-}
-
-section{
-    padding:80px 10%;
-}
-
-section h2{
-    text-align:center;
-    margin-bottom:40px;
-    font-size:2.5rem;
-    color:#0f172a;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-}
-
-.card h3{
-    color:#ef4444;
-    margin-bottom:15px;
-}
-
-.image-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
-}
-
-.image-grid img{
-    width:100%;
-    height:250px;
-    object-fit:cover;
-    border-radius:15px;
-}
-
-.banner{
-    background:linear-gradient(135deg,#ef4444,#b91c1c);
-    color:white;
-    text-align:center;
-}
-
-.banner h2{
-    color:white;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:25px;
-}
-
-.stat{
-    background:white;
-    padding:30px;
-    text-align:center;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-}
-
-.stat h3{
-    color:#ef4444;
-    font-size:2rem;
-}
-
-.timeline{
-    display:flex;
-    flex-direction:column;
-    gap:25px;
-}
-
-.timeline-item{
-    background:white;
-    padding:25px;
-    border-left:8px solid #ef4444;
-    border-radius:10px;
-}
-
-footer{
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:40px;
-}
-
-.reveal{
-    opacity:0;
-    transform:translateY(40px);
-    transition:1s;
-}
-
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
-}
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:2.5rem;
-}
-
-section{
-padding:60px 6%;
-}
-
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLOBAL ALERT - FAKE NEWS</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-<div class="hero">
-<h1>FAKE NEWS</h1>
-
-<p>
-A desinformação se tornou um dos maiores desafios da era digital.
-Aprenda como identificar notícias falsas, proteger-se contra manipulações,
-reconhecer fontes confiáveis e contribuir para uma internet mais segura.
-</p>
-
-<a href="#sobre" class="btn">Começar a Explorar</a>
-</div>
-</header>
-
-<nav>
-<ul>
-<li><a href="#sobre">Sobre</a></li>
-<li><a href="#impacto">Impactos</a></li>
-<li><a href="#casos">Casos Reais</a></li>
-<li><a href="#identificar">Como Identificar</a></li>
-<li><a href="#fontes">Fontes Confiáveis</a></li>
-<li><a href="#odio">Discurso de Ódio</a></li>
-<li><a href="#galeria">Galeria</a></li>
-</ul>
-</nav>
-
-<section id="sobre" class="reveal">
-<h2>O Que São Fake News?</h2>
-
-<p>
-Fake News são informações falsas ou enganosas divulgadas como se fossem verdadeiras.
-Elas podem ser criadas para manipular opiniões, gerar lucro através de cliques,
-causar confusão, influenciar decisões políticas ou simplesmente espalhar boatos.
-Com o crescimento das redes sociais, uma notícia falsa pode alcançar milhões de
-pessoas em poucas horas.
-</p>
-
-<br>
-
-<p>
-Nem toda informação incorreta é necessariamente uma Fake News.
-Muitas vezes erros acontecem por falta de verificação, porém as Fake News costumam
-ser produzidas de forma intencional para enganar o público.
-</p>
-
-</section>
-
-<section class="banner reveal">
-<h2>Por que devemos combater a desinformação?</h2>
-
-<p>
-Uma sociedade bem informada toma melhores decisões.
-A desinformação enfraquece a democracia, prejudica a saúde pública
-e aumenta conflitos sociais.
-</p>
-</section>
-
-<section id="impacto" class="reveal">
-<h2>Impactos das Notícias Falsas</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Saúde Pública</h3>
-<p>
-Informações falsas sobre vacinas, tratamentos médicos e doenças podem colocar vidas em risco.
-Durante crises sanitárias, a desinformação pode ser tão perigosa quanto a própria doença.
-</p>
-</div>
-
-<div class="card">
-<h3>Política</h3>
-<p>
-Fake News podem influenciar eleições, manipular opiniões e criar divisões entre grupos sociais.
-</p>
-</div>
-
-<div class="card">
-<h3>Economia</h3>
-<p>
-Boatos sobre empresas, bancos e investimentos podem causar prejuízos financeiros significativos.
-</p>
-</div>
-
-<div class="card">
-<h3>Relacionamentos</h3>
-<p>
-Mentiras compartilhadas online podem destruir reputações e prejudicar relacionamentos pessoais.
-</p>
-</div>
-
-</div>
-</section>
-
-<section class="reveal">
-
-<h2>Dados Importantes</h2>
-
-<div class="stats">
-
-<div class="stat">
-<h3>Milhões</h3>
-<p>de pessoas recebem notícias diariamente pelas redes sociais.</p>
-</div>
-
-<div class="stat">
-<h3>Segundos</h3>
-<p>é o tempo necessário para compartilhar uma informação sem verificar.</p>
-</div>
-
-<div class="stat">
-<h3>Alto Impacto</h3>
-<p>notícias falsas costumam se espalhar mais rápido que notícias verificadas.</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="casos" class="reveal">
-<h2>Exemplos Reais de Fake News</h2>
-
-<div class="timeline">
-
-<div class="timeline-item">
-<h3>Boatos sobre Vacinas</h3>
-<p>
-Diversas campanhas de desinformação espalharam informações falsas afirmando que vacinas causavam efeitos sem comprovação científica. Esses boatos contribuíram para a queda da vacinação em alguns locais.
-</p>
-</div>
-
-<div class="timeline-item">
-<h3>Rumores Durante Eleições</h3>
-<p>
-Em vários países, eleições foram marcadas pela circulação de conteúdos manipulados, imagens fora de contexto e informações falsas sobre candidatos.
-</p>
-</div>
-
-<div class="timeline-item">
-<h3>Falsas Curas Milagrosas</h3>
-<p>
-Mensagens prometendo curas instantâneas para doenças graves circularam amplamente na internet sem qualquer evidência científica.
-</p>
-</div>
-
-<div class="timeline-item">
-<h3>Fotos Manipuladas</h3>
-<p>
-Imagens editadas ou retiradas de contexto frequentemente são utilizadas para enganar usuários e criar narrativas falsas.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="identificar" class="reveal">
-
-<h2>Como Identificar Fake News</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Verifique a Fonte</h3>
-<p>
-Procure saber quem publicou a notícia. Sites desconhecidos exigem atenção redobrada.
-</p>
-</div>
-
-<div class="card">
-<h3>Leia Além do Título</h3>
-<p>
-Muitos títulos são criados para chamar atenção e podem ser enganosos.
-</p>
-</div>
-
-<div class="card">
-<h3>Confira a Data</h3>
-<p>
-Notícias antigas podem ser compartilhadas como se fossem atuais.
-</p>
-</div>
-
-<div class="card">
-<h3>Pesquise em Outros Lugares</h3>
-<p>
-Compare a informação com veículos reconhecidos e confiáveis.
-</p>
-</div>
-
-<div class="card">
-<h3>Observe as Evidências</h3>
-<p>
-Textos sem fontes, documentos ou referências merecem desconfiança.
-</p>
-</div>
-
-<div class="card">
-<h3>Desconfie de Emoções Extremas</h3>
-<p>
-Mensagens que provocam medo, raiva ou choque excessivo costumam ser usadas para manipular.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="fontes" class="reveal">
-
-<h2>Como Identificar Fontes Confiáveis</h2>
-
-<p>
-Uma fonte confiável normalmente apresenta autoria identificada,
-referências verificáveis, transparência editorial e compromisso com a correção de erros.
-</p>
-
-<br>
-
-<div class="cards">
-
-<div class="card">
-<h3>Autor Identificado</h3>
-<p>
-Verifique se existe um jornalista, pesquisador ou especialista responsável pelo conteúdo.
-</p>
-</div>
-
-<div class="card">
-<h3>Referências</h3>
-<p>
-Boas reportagens mostram dados, estudos e documentos que sustentam as informações.
-</p>
-</div>
-
-<div class="card">
-<h3>Transparência</h3>
-<p>
-Veículos sérios corrigem erros quando necessário e informam claramente suas fontes.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="odio" class="reveal">
-
-<h2>Como Evitar o Discurso de Ódio Online</h2>
-
-<p>
-A disseminação de Fake News muitas vezes está ligada ao discurso de ódio.
-Mensagens falsas podem incentivar preconceito, discriminação e violência contra grupos sociais.
-</p>
-
-<br>
-
-<div class="cards">
-
-<div class="card">
-<h3>Respeite Diferentes Opiniões</h3>
-<p>
-O diálogo respeitoso reduz conflitos e fortalece a convivência democrática.
-</p>
-</div>
-
-<div class="card">
-<h3>Não Compartilhe Conteúdo Ofensivo</h3>
-<p>
-Antes de compartilhar, reflita sobre os possíveis impactos daquela mensagem.
-</p>
-</div>
-
-<div class="card">
-<h3>Denuncie Conteúdos Abusivos</h3>
-<p>
-As plataformas digitais oferecem ferramentas para denunciar conteúdos prejudiciais.
-</p>
-</div>
-
-<div class="card">
-<h3>Promova Informação de Qualidade</h3>
-<p>
-Compartilhar conteúdo verificado ajuda a combater a desinformação.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="galeria" class="reveal">
-
-<h2>Galeria Informativa</h2>
-
-<div class="image-grid">
-
-<img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c">
-<img src="https://images.unsplash.com/photo-1495020689067-958852a7765e">
-<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3">
-<img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a">
-<img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952">
-<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
-
-</div>
-
-</section>
-
-<section class="banner reveal">
-
-<h2>Pense Antes de Compartilhar</h2>
-
-<p>
-Cada compartilhamento tem consequências.
-Verifique a informação, consulte fontes confiáveis e ajude a construir um ambiente digital mais seguro.
-</p>
-
-</section>
-
-<footer>
-
-<h3>Projeto Educacional Sobre Fake News</h3>
-
-<p>
-Desenvolvido em HTML, CSS e JavaScript para conscientização sobre desinformação,
-pensamento crítico e cidadania digital.
-</p>
-
-</footer>
-
-<script>
-
-const reveals = document.querySelectorAll('.reveal');
-
-function revealElements(){
-    reveals.forEach(element => {
-
-        const windowHeight = window.innerHeight;
-        const elementTop = element.getBoundingClientRect().top;
-        const visible = 100;
-
-        if(elementTop < windowHeight - visible){
-            element.classList.add('active');
-        }
-    });
-}
-
-window.addEventListener('scroll', revealElements);
-revealElements();
-
-</script>
-
+  <!-- ALERTA INICIAL -->
+  <div class="alert-screen" id="alertScreen">
+    <h1 class="flash">⚠️ ALERTA GLOBAL ⚠️</h1>
+    <h2 class="explosion" id="explosionText">FAKE NEWS</h2>
+    <p>Sistema mundial de detecção de desinformação ativado</p>
+    <button onclick="entrar()">ENTRAR NO SISTEMA</button>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <header>
+    <h1>🌍 GLOBAL NEWS SECURITY</h1>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#impacto">Impacto</a>
+      <a href="#dados">Dados</a>
+      <a href="#verificador">Verificador</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2 class="danger-title">A DESINFORMAÇÃO ESTÁ SE ESPALHANDO</h2>
+    <p>Milhões de pessoas são afetadas diariamente por conteúdos falsos.</p>
+  </section>
+
+  <section id="sobre" class="card">
+    <h2>📡 O que são Fake News?</h2>
+    <p>
+      Fake News são informações falsas ou enganosas criadas para manipular opiniões,
+      causar confusão ou gerar lucro indevido.
+    </p>
+  </section>
+
+  <section id="impacto" class="card red">
+    <h2>💥 Impacto Global</h2>
+    <ul>
+      <li>Manipulação política</li>
+      <li>Desinformação em saúde</li>
+      <li>Pânico social</li>
+      <li>Perda de confiança na mídia</li>
+    </ul>
+  </section>
+
+  <section id="dados" class="card">
+    <h2>📊 Estatísticas Alarmantes</h2>
+    <p>✔ 70% dos usuários já acreditaram em fake news</p>
+    <p>✔ 60% compartilham sem verificar</p>
+    <p>✔ Crescimento acelerado nas redes sociais</p>
+  </section>
+
+  <section id="verificador" class="card">
+    <h2>🔎 SISTEMA DE DETECÇÃO</h2>
+
+    <input type="text" id="inputNews" placeholder="Digite a notícia aqui...">
+    <button onclick="verificar()">ANALISAR</button>
+
+    <div id="resultado"></div>
+  </section>
+
+  <footer>
+    <p>⚠️ GLOBAL SECURITY SYSTEM - MONITORAMENTO ATIVO</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
