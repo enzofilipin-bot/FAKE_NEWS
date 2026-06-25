@@ -3,221 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fake News — Educação Digital</title>
 
-<title>Fake News: Educação Digital e Combate à Desinformação</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#f5f7fa;
-    color:#222;
-    line-height:1.8;
-}
-
-/* HEADER */
-header{
-    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
-    color:white;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:40px;
-}
-
-.hero{
-    max-width:1000px;
-}
-
-.hero h1{
-    font-size:4rem;
-    margin-bottom:20px;
-}
-
-.hero p{
-    font-size:1.3rem;
-    margin-bottom:30px;
-}
-
-.btn{
-    display:inline-block;
-    background:#ef4444;
-    color:white;
-    padding:15px 35px;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-/* NAV */
-nav{
-    background:#111827;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-nav ul{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    list-style:none;
-}
-
-nav ul li a{
-    display:block;
-    padding:18px;
-    color:white;
-    text-decoration:none;
-    transition:.3s;
-}
-
-nav ul li a:hover{
-    background:#ef4444;
-}
-
-/* SECTIONS */
-section{
-    padding:80px 10%;
-}
-
-section h2{
-    text-align:center;
-    font-size:2.5rem;
-    margin-bottom:40px;
-}
-
-/* CARDS */
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-}
-
-/* TIMELINE */
-.timeline-item{
-    background:white;
-    padding:25px;
-    border-left:6px solid #ef4444;
-    margin-bottom:20px;
-    border-radius:10px;
-}
-
-/* GALERIA */
-.image-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
-}
-
-.image-grid img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:15px;
-}
-
-/* QUIZ */
-#quiz{
-    background:#eef2ff;
-}
-
-.quiz-box{
-    max-width:900px;
-    margin:auto;
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
-}
-
-.answer-btn{
-    display:block;
-    width:100%;
-    margin:10px 0;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:#e5e7eb;
-}
-
-.correct{ background:#22c55e !important; color:white; }
-.wrong{ background:#ef4444 !important; color:white; }
-
-/* FOOTER */
-footer{
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:40px;
-}
-
-/* ANIMATION */
-.reveal{
-    opacity:0;
-    transform:translateY(40px);
-    transition:1s;
-}
-
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* RESPONSIVO */
-@media(max-width:768px){
-.hero h1{font-size:2.5rem;}
-section{padding:60px 6%;}
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
 <div class="hero">
-<h1>FAKE NEWS</h1>
-
-<p>
-Aprenda a identificar, analisar e combater notícias falsas na internet.
-A informação correta protege a sociedade.
-</p>
-
-<a href="#sobre" class="btn">Começar</a>
+<h1>Fake News</h1>
+<p>Educação digital para identificar, entender e combater a desinformação online.</p>
+<a class="btn" href="#sobre">Explorar</a>
 </div>
 </header>
 
 <nav>
 <ul>
 <li><a href="#sobre">Sobre</a></li>
-<li><a href="#impacto">Impactos</a></li>
-<li><a href="#casos">Casos Reais</a></li>
-<li><a href="#identificar">Como Identificar</a></li>
-<li><a href="#fontes">Fontes</a></li>
-<li><a href="#odio">Ódio Online</a></li>
+<li><a href="#impacto">Impacto</a></li>
+<li><a href="#casos">Casos</a></li>
 <li><a href="#galeria">Galeria</a></li>
 <li><a href="#quiz">Quiz</a></li>
 </ul>
@@ -226,8 +31,8 @@ A informação correta protege a sociedade.
 <section id="sobre" class="reveal">
 <h2>O que são Fake News?</h2>
 <p>
-Fake News são informações falsas divulgadas como se fossem verdadeiras.
-Elas podem influenciar opiniões, eleições, saúde e comportamentos sociais.
+Fake News são informações falsas ou manipuladas que se espalham como se fossem verdadeiras,
+gerando confusão e impacto social.
 </p>
 </section>
 
@@ -235,10 +40,10 @@ Elas podem influenciar opiniões, eleições, saúde e comportamentos sociais.
 <h2>Impactos</h2>
 
 <div class="cards">
-<div class="card">Saúde pública prejudicada</div>
-<div class="card">Manipulação política</div>
-<div class="card">Prejuízos econômicos</div>
-<div class="card">Discurso de ódio</div>
+<div class="card">Saúde pública</div>
+<div class="card">Política</div>
+<div class="card">Economia</div>
+<div class="card">Sociedade</div>
 </div>
 </section>
 
@@ -246,45 +51,53 @@ Elas podem influenciar opiniões, eleições, saúde e comportamentos sociais.
 <h2>Casos Reais</h2>
 
 <div class="timeline-item">
-Vacinas com informações falsas já causaram queda na imunização.
+Boatos sobre vacinas afetaram campanhas de imunização.
 </div>
 
 <div class="timeline-item">
-Eleições foram afetadas por boatos online.
+Eleições foram influenciadas por desinformação.
 </div>
 
 <div class="timeline-item">
-Curas falsas foram divulgadas sem comprovação científica.
+Curas falsas circularam na internet sem evidência científica.
+</div>
+</section>
+
+<section id="galeria" class="reveal">
+<h2>Galeria</h2>
+
+<div class="image-grid">
+<img src="https://images.unsplash.com/photo-1581090700227-1e8e0c7c1c7f">
+<img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b">
+<img src="https://images.unsplash.com/photo-1455390582262-044cdead277a">
+<img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c">
+</div>
+</section>
+
+<section id="quiz" class="reveal">
+<h2>Quiz</h2>
+
+<div class="quiz-box">
+
+<div class="progress">
+<div id="progressBar"></div>
+</div>
+
+<h3 id="question"></h3>
+
+<div id="answers"></div>
+
+<p id="scoreText">Pontuação: 0</p>
+
 </div>
 
 </section>
 
-<section id="identificar" class="reveal">
-<h2>Como identificar Fake News</h2>
+<footer>
+<p>Projeto educativo sobre Fake News</p>
+</footer>
 
-<div class="cards">
-<div class="card">Verifique a fonte</div>
-<div class="card">Leia além do título</div>
-<div class="card">Compare com outras notícias</div>
-</div>
-</section>
+<script src="script.js"></script>
 
----
-
-## 🔴 A PARTE 2 vai conter:
-
-- Fontes confiáveis
-- Discurso de ódio
-- Galeria completa
-- QUIZ completo (20 perguntas)
-- JavaScript do quiz funcionando
-- Sistema de pontuação
-- Certificado final
-
----
-
-Diga apenas:
-
-**PARTE 2**
-
-e eu continuo exatamente de onde parei.
+</body>
+</html>
