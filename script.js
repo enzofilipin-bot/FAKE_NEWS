@@ -1,105 +1,99 @@
-document.addEventListener("DOMContentLoaded", () => {
+// Animação ao rolar a página
 
-/* SCROLL ANIMATION */
-const items = document.querySelectorAll(".reveal");
+const reveals = document.querySelectorAll(".reveal");
 
-function show(){
-items.forEach(el=>{
-const top = el.getBoundingClientRect().top;
-if(top < window.innerHeight - 100){
-el.classList.add("active");
-}
-});
-}
+function revealElements() {
 
-window.addEventListener("scroll", show);
-show();
+    reveals.forEach(element => {
 
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const visible = 100;
 
-/* QUIZ */
-const quiz = [
-{
-q:"O que são Fake News?",
-a:["Informações falsas","Notícias oficiais","Livros"],
-c:0
-},
-{
-q:"Qual atitude correta?",
-a:["Verificar fonte","Compartilhar rápido","Ignorar tudo"],
-c:0
-},
-{
-q:"Imagens podem ser falsas?",
-a:["Sim","Não","Nunca"],
-c:0
-},
-{
-q:"Fake News se espalham como?",
-a:["Muito rápido","Devagar","Não espalham"],
-c:0
-},
-{
-q:"O que evita desinformação?",
-a:["Checar antes de compartilhar","Acreditar em tudo","Ignorar fatos"],
-c:0
-}
-];
+        if (elementTop < windowHeight - visible) {
+            element.classList.add("active");
+        }
 
-let i = 0;
-let score = 0;
+    });
 
-const question = document.getElementById("question");
-const answers = document.getElementById("answers");
-const progress = document.getElementById("progressBar");
-const scoreText = document.getElementById("scoreText");
-
-function load(){
-
-const q = quiz[i];
-
-question.textContent = q.q;
-answers.innerHTML = "";
-
-q.a.forEach((text,index)=>{
-
-const btn = document.createElement("button");
-btn.className = "answer-btn";
-btn.textContent = text;
-
-btn.onclick = () => {
-
-const all = document.querySelectorAll(".answer-btn");
-all.forEach(b=>b.disabled = true);
-
-if(index === q.c){
-btn.classList.add("correct");
-score++;
-}else{
-btn.classList.add("wrong");
-all[q.c].classList.add("correct");
 }
 
-setTimeout(()=>{
-i++;
-if(i < quiz.length){
-load();
-}else{
-answers.innerHTML = `
-<h2>Resultado final</h2>
-<p>Você acertou ${score} de ${quiz.length}</p>
-`;
-}
-},600);
+window.addEventListener("scroll", revealElements);
+revealElements();
 
-};
 
-answers.appendChild(btn);
+// Botão modo escuro
+
+const darkButton = document.createElement("button");
+
+darkButton.innerHTML = "🌙";
+darkButton.classList.add("dark-btn");
+
+document.body.appendChild(darkButton);
+
+darkButton.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        darkButton.innerHTML = "☀️";
+    }else{
+        darkButton.innerHTML = "🌙";
+    }
 
 });
 
-progress.style.width = (i/quiz.length)*100 + "%";
-}
 
-load();
+// Contador animado
+
+const stats = document.querySelectorAll(".stat h3");
+
+stats.forEach(stat => {
+
+    let start = 0;
+    const end = 100;
+
+    const counter = setInterval(() => {
+
+        start++;
+
+        if(start >= end){
+            clearInterval(counter);
+        }
+
+    },20);
+
+});
+
+
+// Mensagem de conscientização
+
+setTimeout(() => {
+
+    alert(
+        "Antes de compartilhar qualquer informação, verifique a fonte e confirme se ela é confiável."
+    );
+
+}, 3000);
+
+
+// Botão voltar ao topo
+
+const topButton = document.createElement("button");
+
+topButton.innerHTML = "↑";
+topButton.classList.add("dark-btn");
+
+topButton.style.bottom = "90px";
+topButton.style.background = "#2563eb";
+
+document.body.appendChild(topButton);
+
+topButton.addEventListener("click", () => {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 });
