@@ -2,30 +2,23 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
+font-family:system-ui, Arial, sans-serif;
 }
 
 body{
-background:#050814;
+background:#0b1220;
 color:#e5e7eb;
-line-height:1.7;
-overflow-x:hidden;
+line-height:1.8;
 }
 
-/* ALERTA TOP */
+/* ALERTA */
 .alert-top{
-background:#dc2626;
+background:#b91c1c;
 color:white;
 text-align:center;
-padding:10px;
-font-weight:bold;
-font-size:14px;
+padding:12px;
+font-weight:700;
 letter-spacing:1px;
-animation:blink 1.2s infinite;
-}
-
-@keyframes blink{
-50%{opacity:0.5;}
 }
 
 /* HERO */
@@ -36,52 +29,46 @@ align-items:center;
 justify-content:center;
 text-align:center;
 padding:20px;
-background:radial-gradient(circle,#111827,#000);
+background:linear-gradient(180deg,#0b1220,#050814);
 }
 
 .hero h1{
-font-size:clamp(2.8rem,8vw,5rem);
-color:#ef4444;
-text-shadow:0 0 20px #ef4444;
-animation:pulse 1.5s infinite alternate;
-}
-
-@keyframes pulse{
-from{transform:scale(1);}
-to{transform:scale(1.05);}
+font-size:clamp(3rem,8vw,6rem);
+color:#ff3b3b;
+text-shadow:0 0 25px rgba(255,0,0,0.4);
 }
 
 .hero p{
-max-width:800px;
+max-width:850px;
 margin:20px auto;
 color:#cbd5e1;
-font-size:16px;
-padding:0 10px;
+font-size:18px;
 }
 
+/* BOTÃO */
 .btn-alert{
 display:inline-block;
-padding:14px 26px;
-background:#ef4444;
+padding:14px 28px;
+background:#ff3b3b;
 color:white;
 text-decoration:none;
-font-weight:bold;
-border-radius:8px;
-margin-top:20px;
+border-radius:10px;
+font-weight:700;
 transition:.3s;
 }
 
 .btn-alert:hover{
-background:#b91c1c;
+background:#c1121f;
+transform:scale(1.05);
 }
 
 /* NAV */
 nav{
-background:#0f172a;
 position:sticky;
 top:0;
-z-index:1000;
+background:#0f172a;
 border-bottom:1px solid #1f2937;
+z-index:999;
 }
 
 nav ul{
@@ -92,11 +79,11 @@ list-style:none;
 }
 
 nav a{
+display:block;
+padding:12px 16px;
 color:#e5e7eb;
 text-decoration:none;
-padding:12px 14px;
-font-size:13px;
-display:block;
+font-size:14px;
 }
 
 nav a:hover{
@@ -105,50 +92,58 @@ background:#1f2937;
 
 /* SEÇÕES */
 section{
-padding:70px 18%;
+padding:90px 20%;
+max-width:1400px;
+margin:auto;
 }
 
 h2{
-color:#ef4444;
+font-size:2rem;
 margin-bottom:20px;
-font-size:1.8rem;
+color:#ff3b3b;
+}
+
+p{
+margin-bottom:15px;
+color:#cbd5e1;
 }
 
 /* CARDS */
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:12px;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:16px;
+margin-top:20px;
 }
 
 .card{
-background:#0f172a;
+background:#111827;
 border:1px solid #1f2937;
-padding:18px;
-border-radius:10px;
+padding:20px;
+border-radius:12px;
 transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-5px);
-border-color:#ef4444;
+transform:translateY(-6px);
+border-color:#ff3b3b;
 }
 
 /* TIMELINE */
 .timeline-item{
-background:#0f172a;
-padding:16px;
-border-left:4px solid #ef4444;
-margin-bottom:10px;
-border-radius:6px;
+background:#111827;
+padding:18px;
+border-left:5px solid #ff3b3b;
+margin-bottom:12px;
+border-radius:8px;
 }
 
 /* QUIZ */
 .quiz-box{
-max-width:800px;
+max-width:900px;
 margin:auto;
-background:#0f172a;
-padding:25px;
+background:#111827;
+padding:30px;
 border-radius:12px;
 border:1px solid #1f2937;
 }
@@ -156,8 +151,8 @@ border:1px solid #1f2937;
 .answer-btn{
 width:100%;
 padding:12px;
-margin:6px 0;
-background:#111827;
+margin:8px 0;
+background:#0f172a;
 color:white;
 border:none;
 border-radius:8px;
@@ -170,13 +165,8 @@ transition:.2s;
 background:#1f2937;
 }
 
-.correct{
-background:#16a34a !important;
-}
-
-.wrong{
-background:#dc2626 !important;
-}
+.correct{background:#16a34a !important;}
+.wrong{background:#dc2626 !important;}
 
 /* PROGRESS */
 .progress{
@@ -190,15 +180,15 @@ margin-bottom:15px;
 #progressBar{
 height:100%;
 width:0%;
-background:#ef4444;
+background:#ff3b3b;
 transition:.3s;
 }
 
 /* REVEAL */
 .reveal{
 opacity:0;
-transform:translateY(30px);
-transition:.6s;
+transform:translateY(25px);
+transition:.5s;
 }
 
 .reveal.active{
@@ -206,19 +196,22 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* MOBILE */
+/* MOBILE REAL */
 @media(max-width:768px){
 
 section{
-padding:50px 15px;
+padding:60px 15px;
+}
+
+.hero p{
+font-size:15px;
+}
+
+h2{
+font-size:1.6rem;
 }
 
 nav a{
 font-size:12px;
-padding:10px;
-}
-
-.hero p{
-font-size:14px;
 }
 }
