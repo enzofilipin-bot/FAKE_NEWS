@@ -1,38 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+/* =========================
+   SCROLL ANIMATION
+========================= */
+
+const reveals = document.querySelectorAll(".reveal");
+
+function reveal(){
+reveals.forEach(el=>{
+const top = el.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+el.classList.add("active");
+}
+});
+}
+
+window.addEventListener("scroll", reveal);
+reveal();
+
+
+/* =========================
+        QUIZ
+========================= */
+
 const quizData = [
 {
-question:"O que é Fake News?",
-answers:[
-"Informação falsa",
-"Notícia científica",
-"Livro"
-],
-correct:0
+q:"O que são Fake News?",
+a:["Informações falsas","Notícias científicas","Livros"],
+c:0
 },
 {
-question:"Você deve verificar fontes?",
-answers:["Sim","Não","Nunca"],
-correct:0
+q:"Qual atitude correta?",
+a:["Verificar fonte","Compartilhar rápido","Ignorar tudo"],
+c:0
 },
 {
-question:"Imagens podem ser falsas?",
-answers:["Sim","Não","Sempre verdadeiras"],
-correct:0
+q:"Imagens podem ser manipuladas?",
+a:["Sim","Não","Nunca"],
+c:0
 },
 {
-question:"Fake News se espalham rápido?",
-answers:["Sim","Não","Nunca"],
-correct:0
+q:"Fake News causam impacto?",
+a:["Sim","Não","Nenhum"],
+c:0
 },
 {
-question:"Melhor atitude online?",
-answers:["Checar informações","Compartilhar rápido","Ignorar"],
-correct:0
+q:"O melhor comportamento online é:",
+a:["Checar antes de compartilhar","Enviar sem ler","Acreditar em tudo"],
+c:0
 }
 ];
 
-let current = 0;
+let i = 0;
 let score = 0;
 
 const question = document.getElementById("question");
@@ -42,38 +61,43 @@ const scoreText = document.getElementById("scoreText");
 
 function load(){
 
-const q = quizData[current];
+const data = quizData[i];
 
-question.textContent = q.question;
+question.textContent = data.q;
 answers.innerHTML = "";
 
-q.answers.forEach((a,i)=>{
+data.a.forEach((text,index)=>{
 
 const btn = document.createElement("button");
 btn.classList.add("answer-btn");
-btn.textContent = a;
+btn.textContent = text;
 
 btn.onclick = () => {
 
-if(i === q.correct){
-btn.style.background = "green";
+const all = document.querySelectorAll(".answer-btn");
+all.forEach(b=>b.disabled=true);
+
+if(index === data.c){
+btn.classList.add("correct");
 score++;
 }else{
-btn.style.background = "red";
+btn.classList.add("wrong");
+all[data.c].classList.add("correct");
 }
+
+scoreText.textContent = "Pontuação: " + score;
 
 setTimeout(()=>{
-
-current++;
-
-if(current < quizData.length){
+i++;
+if(i < quizData.length){
 load();
 }else{
-answers.innerHTML =
-`<h2>Missão concluída</h2><p>Score: ${score}/${quizData.length}</p>`;
+answers.innerHTML = `
+<h2>Missão concluída</h2>
+<p>Você acertou ${score} de ${quizData.length}</p>
+`;
 }
-
-},600);
+},700);
 
 };
 
@@ -81,7 +105,8 @@ answers.appendChild(btn);
 
 });
 
-progress.style.width = (current/quizData.length)*100 + "%";
+progress.style.width = (i/quizData.length)*100 + "%";
+
 }
 
 load();
