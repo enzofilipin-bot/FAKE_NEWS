@@ -1,51 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-/* =========================
-        ANIMAÇÃO SCROLL
-========================= */
-
-const reveals = document.querySelectorAll(".reveal");
-
-function revealElements(){
-    reveals.forEach(el => {
-        const windowHeight = window.innerHeight;
-        const elementTop = el.getBoundingClientRect().top;
-
-        if(elementTop < windowHeight - 100){
-            el.classList.add("active");
-        }
-    });
-}
-
-window.addEventListener("scroll", revealElements);
-revealElements();
-
-
-/* =========================
-        QUIZ DATA
-========================= */
-
 const quizData = [
 {
-question:"O que é Fake News?",
+question:"O que são Fake News?",
 answers:[
-"Informação falsa divulgada como verdadeira",
-"Notícia científica",
-"Livro escolar"
+"Informações falsas",
+"Jornal científico",
+"Relatório oficial"
 ],
 correct:0
 },
 {
-question:"Você deve verificar a fonte antes de compartilhar?",
-answers:[
-"Sim",
-"Não",
-"Apenas às vezes"
-],
-correct:0
-},
-{
-question:"Imagens podem ser manipuladas?",
+question:"Devemos verificar fontes?",
 answers:[
 "Sim",
 "Não",
@@ -54,163 +20,106 @@ answers:[
 correct:0
 },
 {
-question:"Fake News podem causar problemas sociais?",
+question:"Imagens podem ser manipuladas?",
 answers:[
 "Sim",
 "Não",
-"Nenhum"
+"Sempre verdadeiras"
 ],
 correct:0
 },
 {
-question:"Qual é a melhor atitude?",
+question:"Fake News causam impacto social?",
 answers:[
-"Verificar informações",
+"Sim",
+"Não",
+"Nenhum impacto"
+],
+correct:0
+},
+{
+question:"Melhor atitude online?",
+answers:[
+"Checar informações",
 "Compartilhar rápido",
-"Ignorar dúvidas"
+"Acreditar em tudo"
 ],
 correct:0
 }
 ];
 
-
-/* =========================
-        ELEMENTOS
-========================= */
+let current = 0;
+let score = 0;
 
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
 const scoreText = document.getElementById("scoreText");
 const progressBar = document.getElementById("progressBar");
-const nextBtn = document.getElementById("nextBtn");
-
-
-/* =========================
-        VARIÁVEIS
-========================= */
-
-let currentQuestion = 0;
-let score = 0;
-
-
-/* =========================
-        CARREGAR QUESTÃO
-========================= */
 
 function loadQuestion(){
 
-if(!questionEl || !answersEl) return;
+const q = quizData[current];
 
-const q = quizData[currentQuestion];
-
-questionEl.innerText = q.question;
+questionEl.textContent = q.question;
 answersEl.innerHTML = "";
 
-q.answers.forEach((answer, index) => {
+q.answers.forEach((a, i) => {
 
 const btn = document.createElement("button");
 btn.classList.add("answer-btn");
-btn.innerText = answer;
+btn.textContent = a;
 
-btn.onclick = () => checkAnswer(index);
+btn.onclick = () => checkAnswer(i);
 
 answersEl.appendChild(btn);
 
 });
 
-/* barra de progresso */
-if(progressBar){
-progressBar.style.width =
-(currentQuestion / quizData.length) * 100 + "%";
+progressBar.style.width = (current / quizData.length) * 100 + "%";
 }
 
-}
-
-
-/* =========================
-        VERIFICAR RESPOSTA
-========================= */
-
-function checkAnswer(index){
+function checkAnswer(i){
 
 const buttons = document.querySelectorAll(".answer-btn");
-
 buttons.forEach(b => b.disabled = true);
 
-const correct = quizData[currentQuestion].correct;
+const correct = quizData[current].correct;
 
-if(index === correct){
-buttons[index].classList.add("correct");
+if(i === correct){
+buttons[i].classList.add("correct");
 score++;
 }else{
-buttons[index].classList.add("wrong");
+buttons[i].classList.add("wrong");
 buttons[correct].classList.add("correct");
 }
 
-if(scoreText){
-scoreText.innerText = "Pontuação: " + score;
-}
+scoreText.textContent = "Pontuação: " + score;
 
-}
+setTimeout(() => {
+current++;
 
-
-/* =========================
-        PRÓXIMA
-========================= */
-
-if(nextBtn){
-
-nextBtn.addEventListener("click", () => {
-
-currentQuestion++;
-
-if(currentQuestion < quizData.length){
+if(current < quizData.length){
 loadQuestion();
 }else{
 showResult();
 }
-
-});
+}, 800);
 
 }
-
-
-/* =========================
-        RESULTADO FINAL
-========================= */
 
 function showResult(){
-
-const box = document.querySelector(".quiz-box");
-
-if(!box) return;
-
-box.innerHTML = `
-<h2>🏆 Quiz Finalizado</h2>
+document.querySelector(".quiz-box").innerHTML = `
+<h2>Quiz Finalizado</h2>
 <p>Você acertou ${score} de ${quizData.length}</p>
 <h3>${getLevel()}</h3>
-<p>Obrigado por participar!</p>
 `;
-
 }
-
-
-/* =========================
-        NÍVEL
-========================= */
 
 function getLevel(){
-
-if(score <= 2) return "🥉 Iniciante";
-if(score <= 4) return "🥈 Investigador";
-return "🥇 Especialista";
-
+if(score <= 2) return "Iniciante";
+if(score <= 4) return "Intermediário";
+return "Avançado";
 }
-
-
-/* =========================
-        START
-========================= */
 
 loadQuestion();
 
