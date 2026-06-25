@@ -1,281 +1,356 @@
-/* RESET */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+
+/* =========================
+   ANIMAÇÃO AO ROLAR A PÁGINA
+========================= */
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revealElements(){
+    reveals.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const visible = 100;
+
+        if(elementTop < windowHeight - visible){
+            el.classList.add("active");
+        }
+    });
 }
 
-html{
-    scroll-behavior:smooth;
+window.addEventListener("scroll", revealElements);
+revealElements();
+
+
+/* =========================
+        QUIZ DATA
+========================= */
+
+const quizData = [
+{
+question:"O que é Fake News?",
+answers:[
+"Informação falsa divulgada como verdadeira",
+"Notícia científica",
+"Relatório oficial"
+],
+correct:0
+},
+{
+question:"Qual a primeira atitude antes de compartilhar uma notícia?",
+answers:[
+"Verificar a fonte",
+"Compartilhar imediatamente",
+"Acreditar no título"
+],
+correct:0
+},
+{
+question:"Fotos podem ser manipuladas?",
+answers:[
+"Sim",
+"Não",
+"Sempre verdadeiras"
+],
+correct:0
+},
+{
+question:"Fake News podem afetar eleições?",
+answers:[
+"Sim",
+"Não",
+"Nunca"
+],
+correct:0
+},
+{
+question:"Uma fonte confiável geralmente tem:",
+answers:[
+"Autoria e referências",
+"Anonimato total",
+"Sem informações"
+],
+correct:0
+},
+{
+question:"Notícias antigas podem ser usadas como se fossem atuais?",
+answers:[
+"Sim",
+"Não",
+"Nunca"
+],
+correct:0
+},
+{
+question:"O que é mais seguro fazer antes de compartilhar?",
+answers:[
+"Checar outras fontes",
+"Compartilhar rápido",
+"Ignorar a verificação"
+],
+correct:0
+},
+{
+question:"Fake News podem causar:",
+answers:[
+"Desinformação e prejuízos sociais",
+"Nada",
+"Apenas entretenimento"
+],
+correct:0
+},
+{
+question:"Discursos de ódio devem ser:",
+answers:[
+"Denunciados",
+"Incentivados",
+"Ignorados sempre"
+],
+correct:0
+},
+{
+question:"Qual atitude ajuda a combater Fake News?",
+answers:[
+"Educação digital",
+"Espalhar boatos",
+"Compartilhar sem ler"
+],
+correct:0
+},
+{
+question:"Vídeos na internet podem ser editados?",
+answers:[
+"Sim",
+"Não",
+"Nunca"
+],
+correct:0
+},
+{
+question:"Qual é o maior risco das Fake News?",
+answers:[
+"Manipulação da opinião pública",
+"Entretenimento",
+"Nenhum risco"
+],
+correct:0
+},
+{
+question:"Uma notícia confiável deve ter:",
+answers:[
+"Evidências verificáveis",
+"Opiniões sem base",
+"Apenas títulos chamativos"
+],
+correct:0
+},
+{
+question:"Compartilhar sem verificar pode causar:",
+answers:[
+"Propagação de mentiras",
+"Nenhum problema",
+"Informação correta sempre"
+],
+correct:0
+},
+{
+question:"O que é mais confiável?",
+answers:[
+"Jornal reconhecido",
+"Mensagem de grupo",
+"Perfil anônimo"
+],
+correct:0
+},
+{
+question:"Fake News se espalham principalmente por:",
+answers:[
+"Redes sociais",
+"Livros científicos",
+"Jornais oficiais"
+],
+correct:0
+},
+{
+question:"O que ajuda a identificar Fake News?",
+answers:[
+"Comparar fontes",
+"Acreditar em tudo",
+"Ignorar detalhes"
+],
+correct:0
+},
+{
+question:"Uma emoção forte em uma notícia pode indicar:",
+answers:[
+"Manipulação",
+"Verdade absoluta",
+"Neutralidade"
+],
+correct:0
+},
+{
+question:"Antes de compartilhar devemos:",
+answers:[
+"Pausar e verificar",
+"Enviar rápido",
+"Ignorar dúvida"
+],
+correct:0
+},
+{
+question:"Fake News podem ser perigosas porque:",
+answers:[
+"Influenciam decisões importantes",
+"São engraçadas",
+"Não têm impacto"
+],
+correct:0
+}
+];
+
+
+/* =========================
+        VARIÁVEIS
+========================= */
+
+let currentQuestion = 0;
+let score = 0;
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const scoreText = document.getElementById("scoreText");
+const progressBar = document.getElementById("progressBar");
+const nextBtn = document.getElementById("nextBtn");
+
+
+/* =========================
+     CARREGAR PERGUNTA
+========================= */
+
+function loadQuestion(){
+
+if(!questionEl) return;
+
+const q = quizData[currentQuestion];
+
+questionEl.innerText = q.question;
+answersEl.innerHTML = "";
+
+/* criar botões */
+q.answers.forEach((answer, index) => {
+
+const btn = document.createElement("button");
+btn.classList.add("answer-btn");
+btn.innerText = answer;
+
+btn.addEventListener("click", () => checkAnswer(index));
+
+answersEl.appendChild(btn);
+
+});
+
+/* atualizar barra */
+progressBar.style.width =
+(currentQuestion / quizData.length) * 100 + "%";
+
 }
 
-body{
-    background:#f5f7fa;
-    color:#222;
-    line-height:1.8;
+
+/* =========================
+      VERIFICAR RESPOSTA
+========================= */
+
+function checkAnswer(index){
+
+const buttons = document.querySelectorAll(".answer-btn");
+
+buttons.forEach(b => b.disabled = true);
+
+const correctIndex = quizData[currentQuestion].correct;
+
+if(index === correctIndex){
+
+buttons[index].classList.add("correct");
+score++;
+
+}else{
+
+buttons[index].classList.add("wrong");
+buttons[correctIndex].classList.add("correct");
+
 }
 
-/* HEADER */
-header{
-    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
-    color:white;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:40px;
+scoreText.innerText = "Pontuação: " + score;
+
 }
 
-.hero{
-    max-width:1000px;
+
+/* =========================
+     PRÓXIMA PERGUNTA
+========================= */
+
+if(nextBtn){
+
+nextBtn.addEventListener("click", () => {
+
+currentQuestion++;
+
+if(currentQuestion < quizData.length){
+
+loadQuestion();
+
+}else{
+
+showResult();
+
 }
 
-.hero h1{
-    font-size:4rem;
-    margin-bottom:20px;
+});
+
 }
 
-.hero p{
-    font-size:1.3rem;
-    margin-bottom:30px;
+
+/* =========================
+       RESULTADO FINAL
+========================= */
+
+function showResult(){
+
+document.querySelector(".quiz-box").innerHTML = `
+
+<h2>🏆 Quiz Finalizado</h2>
+
+<p>Você acertou ${score} de ${quizData.length}</p>
+
+<h3>
+${getLevel()}
+</h3>
+
+<p>
+Parabéns por completar o quiz sobre Fake News!
+</p>
+
+`;
+
 }
 
-.btn{
-    display:inline-block;
-    background:#ef4444;
-    color:white;
-    padding:15px 35px;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:bold;
-    transition:.3s;
+
+/* =========================
+        NÍVEL DO JOGADOR
+========================= */
+
+function getLevel(){
+
+if(score <= 5) return "🥉 Iniciante";
+if(score <= 12) return "🥈 Investigador";
+if(score <= 17) return "🥇 Especialista";
+
+return "🏆 Caçador de Fake News";
 }
 
-.btn:hover{
-    background:#dc2626;
-    transform:translateY(-3px);
-}
 
-/* NAV */
-nav{
-    background:#111827;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
+/* =========================
+     INICIAR QUIZ
+========================= */
 
-nav ul{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    list-style:none;
-}
-
-nav ul li a{
-    display:block;
-    padding:18px;
-    color:white;
-    text-decoration:none;
-    transition:.3s;
-}
-
-nav ul li a:hover{
-    background:#ef4444;
-}
-
-/* SECTIONS */
-section{
-    padding:80px 10%;
-}
-
-section h2{
-    text-align:center;
-    font-size:2.5rem;
-    margin-bottom:40px;
-    color:#0f172a;
-}
-
-/* CARDS */
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-8px);
-}
-
-/* TIMELINE */
-.timeline-item{
-    background:white;
-    padding:25px;
-    border-left:6px solid #ef4444;
-    margin-bottom:20px;
-    border-radius:10px;
-    box-shadow:0 5px 10px rgba(0,0,0,.05);
-}
-
-/* GALERIA */
-.image-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
-}
-
-.image-grid img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:15px;
-    transition:.3s;
-}
-
-.image-grid img:hover{
-    transform:scale(1.05);
-}
-
-/* BANNER */
-.banner{
-    background:linear-gradient(135deg,#ef4444,#b91c1c);
-    color:white;
-    text-align:center;
-    padding:60px;
-}
-
-.banner h2{
-    color:white;
-}
-
-/* STATS */
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:25px;
-}
-
-.stat{
-    background:white;
-    padding:30px;
-    text-align:center;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-}
-
-/* QUIZ */
-#quiz{
-    background:#eef2ff;
-}
-
-.quiz-box{
-    max-width:900px;
-    margin:auto;
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-}
-
-#question{
-    font-size:1.4rem;
-    margin-bottom:20px;
-}
-
-.answer-btn{
-    display:block;
-    width:100%;
-    margin:10px 0;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:#e5e7eb;
-    transition:.3s;
-    font-size:16px;
-}
-
-.answer-btn:hover{
-    background:#dbeafe;
-}
-
-.correct{
-    background:#22c55e !important;
-    color:white;
-}
-
-.wrong{
-    background:#ef4444 !important;
-    color:white;
-}
-
-/* PROGRESS BAR */
-.progress{
-    width:100%;
-    height:15px;
-    background:#ddd;
-    border-radius:20px;
-    overflow:hidden;
-    margin-bottom:20px;
-}
-
-#progressBar{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#22c55e,#16a34a);
-    transition:.5s;
-}
-
-/* BUTTON NEXT */
-#nextBtn{
-    margin-top:20px;
-    padding:15px 25px;
-    background:#2563eb;
-    color:white;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-/* SCORE */
-#scoreText{
-    margin-top:15px;
-    font-size:18px;
-    font-weight:bold;
-}
-
-/* FOOTER */
-footer{
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:40px;
-}
-
-/* ANIMATION SCROLL */
-.reveal{
-    opacity:0;
-    transform:translateY(40px);
-    transition:1s;
-}
-
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* RESPONSIVO */
-@media(max-width:768px){
-.hero h1{font-size:2.5rem;}
-.hero p{font-size:1rem;}
-section{padding:60px 6%;}
-}
+loadQuestion();
