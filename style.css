@@ -2,26 +2,28 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-background:#0b0f19;
-color:white;
+background:#070a12;
+color:#e5e7eb;
+line-height:1.7;
 }
 
 /* ALERTA TOPO */
 .alert-top{
-background:red;
+background:#b91c1c;
 color:white;
 text-align:center;
 padding:10px;
 font-weight:bold;
-animation:blink 1s infinite;
+letter-spacing:1px;
+animation:blink 1.2s infinite;
 }
 
 @keyframes blink{
-50%{opacity:0.4;}
+50%{opacity:0.5;}
 }
 
 /* HERO */
@@ -32,90 +34,116 @@ align-items:center;
 justify-content:center;
 text-align:center;
 padding:40px;
-background:radial-gradient(circle,#1a1f2e,#000);
+background:radial-gradient(circle,#111827,#000);
 }
 
-/* EXPLOSÃO */
-.explosion{
+.hero h1{
 font-size:5rem;
-color:red;
-text-shadow:0 0 20px red,0 0 40px orange;
-animation:explode 1.5s infinite alternate;
+color:#ef4444;
+text-shadow:0 0 20px #ef4444, 0 0 40px #7f1d1d;
+animation:pulse 1.5s infinite alternate;
 }
 
-@keyframes explode{
-0%{transform:scale(1);}
-100%{transform:scale(1.1) rotate(-1deg);}
+@keyframes pulse{
+from{transform:scale(1);}
+to{transform:scale(1.05);}
+}
+
+.hero p{
+max-width:700px;
+margin:20px auto;
+color:#cbd5e1;
 }
 
 .btn-alert{
 display:inline-block;
-margin-top:20px;
 padding:15px 30px;
-background:red;
+background:#ef4444;
 color:white;
 text-decoration:none;
 font-weight:bold;
-border-radius:10px;
+border-radius:8px;
+margin-top:20px;
+transition:.3s;
+}
+
+.btn-alert:hover{
+background:#dc2626;
 }
 
 /* NAV */
 nav{
-background:#111827;
+background:#0f172a;
 position:sticky;
 top:0;
+z-index:1000;
+border-bottom:1px solid #1f2937;
 }
 
 nav ul{
 display:flex;
 justify-content:center;
+flex-wrap:wrap;
 list-style:none;
 }
 
 nav a{
-color:white;
-padding:15px;
-display:block;
+color:#e5e7eb;
 text-decoration:none;
+padding:14px 18px;
+display:block;
+font-size:14px;
+}
+
+nav a:hover{
+background:#1f2937;
 }
 
 /* SEÇÕES */
 section{
-padding:80px 15%;
+padding:80px 18%;
 }
 
 h2{
+color:#ef4444;
 margin-bottom:20px;
-color:#ff3b3b;
+font-size:2rem;
 }
 
 /* CARDS */
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:15px;
 }
 
 .card{
-background:#111827;
+background:#0f172a;
+border:1px solid #1f2937;
 padding:20px;
-border:1px solid #ff3b3b;
 border-radius:10px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:#ef4444;
 }
 
 /* TIMELINE */
 .timeline-item{
-background:#111827;
-padding:20px;
-border-left:4px solid red;
+background:#0f172a;
+padding:18px;
+border-left:4px solid #ef4444;
 margin-bottom:10px;
+border-radius:6px;
 }
 
 /* GALERIA */
 .image-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:10px;
+gap:12px;
 }
 
 .image-grid img{
@@ -124,41 +152,53 @@ height:200px;
 object-fit:cover;
 border-radius:10px;
 transition:.3s;
+filter:grayscale(20%);
 }
 
 .image-grid img:hover{
-transform:scale(1.05);
+transform:scale(1.03);
+filter:grayscale(0%);
 }
 
 /* QUIZ */
 .quiz-box{
 max-width:800px;
 margin:auto;
-background:#111827;
+background:#0f172a;
 padding:30px;
-border-radius:10px;
-border:1px solid red;
+border-radius:12px;
+border:1px solid #1f2937;
 }
 
 .answer-btn{
 width:100%;
 padding:12px;
 margin:8px 0;
-background:#1f2937;
-color:white;
 border:none;
-cursor:pointer;
+background:#111827;
+color:white;
 border-radius:8px;
+cursor:pointer;
+transition:.2s;
+text-align:left;
 }
 
 .answer-btn:hover{
-background:#374151;
+background:#1f2937;
+}
+
+.correct{
+background:#16a34a !important;
+}
+
+.wrong{
+background:#dc2626 !important;
 }
 
 /* PROGRESS */
 .progress{
-height:10px;
-background:#333;
+height:8px;
+background:#1f2937;
 border-radius:10px;
 overflow:hidden;
 margin-bottom:20px;
@@ -167,21 +207,22 @@ margin-bottom:20px;
 #progressBar{
 height:100%;
 width:0%;
-background:red;
+background:#ef4444;
+transition:.4s;
 }
 
 /* FOOTER */
 footer{
 text-align:center;
 padding:40px;
-color:#aaa;
+color:#94a3b8;
 }
 
-/* REVEAL */
+/* ANIMAÇÃO */
 .reveal{
 opacity:0;
-transform:translateY(40px);
-transition:.8s;
+transform:translateY(30px);
+transition:.6s;
 }
 
 .reveal.active{
