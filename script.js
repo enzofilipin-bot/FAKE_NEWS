@@ -1,53 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-/* ======================
-   SCROLL ANIMATION
-====================== */
+/* SCROLL ANIMATION */
+const items = document.querySelectorAll(".reveal");
 
-const revealItems = document.querySelectorAll(".reveal");
-
-function reveal(){
-revealItems.forEach(el=>{
+function show(){
+items.forEach(el=>{
 const top = el.getBoundingClientRect().top;
-
-if(top < window.innerHeight - 80){
+if(top < window.innerHeight - 100){
 el.classList.add("active");
 }
 });
 }
 
-window.addEventListener("scroll", reveal);
-reveal();
+window.addEventListener("scroll", show);
+show();
 
 
-/* ======================
-        QUIZ
-====================== */
-
+/* QUIZ */
 const quiz = [
 {
 q:"O que são Fake News?",
-a:["Informações falsas","Notícias científicas","Livros"],
+a:["Informações falsas","Notícias oficiais","Livros"],
 c:0
 },
 {
-q:"Qual é a melhor atitude online?",
-a:["Checar fontes","Compartilhar rápido","Ignorar tudo"],
+q:"Qual atitude correta?",
+a:["Verificar fonte","Compartilhar rápido","Ignorar tudo"],
 c:0
 },
 {
-q:"Imagens podem ser manipuladas?",
+q:"Imagens podem ser falsas?",
 a:["Sim","Não","Nunca"],
 c:0
 },
 {
-q:"Fake News se espalham rápido?",
-a:["Sim","Não","Devagar"],
+q:"Fake News se espalham como?",
+a:["Muito rápido","Devagar","Não espalham"],
 c:0
 },
 {
-q:"O que evitar?",
-a:["Compartilhar sem verificar","Ler notícias","Pesquisar"],
+q:"O que evita desinformação?",
+a:["Checar antes de compartilhar","Acreditar em tudo","Ignorar fatos"],
 c:0
 }
 ];
@@ -60,7 +53,7 @@ const answers = document.getElementById("answers");
 const progress = document.getElementById("progressBar");
 const scoreText = document.getElementById("scoreText");
 
-function loadQuestion(){
+function load(){
 
 const q = quiz[i];
 
@@ -76,7 +69,7 @@ btn.textContent = text;
 btn.onclick = () => {
 
 const all = document.querySelectorAll(".answer-btn");
-all.forEach(b => b.disabled = true);
+all.forEach(b=>b.disabled = true);
 
 if(index === q.c){
 btn.classList.add("correct");
@@ -86,20 +79,16 @@ btn.classList.add("wrong");
 all[q.c].classList.add("correct");
 }
 
-scoreText.textContent = "Pontuação: " + score;
-
 setTimeout(()=>{
 i++;
-
 if(i < quiz.length){
-loadQuestion();
+load();
 }else{
 answers.innerHTML = `
-<h2>Quiz finalizado</h2>
+<h2>Resultado final</h2>
 <p>Você acertou ${score} de ${quiz.length}</p>
 `;
 }
-
 },600);
 
 };
@@ -111,6 +100,6 @@ answers.appendChild(btn);
 progress.style.width = (i/quiz.length)*100 + "%";
 }
 
-loadQuestion();
+load();
 
 });
