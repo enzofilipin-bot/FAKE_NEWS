@@ -1,6 +1,7 @@
+document.addEventListener("DOMContentLoaded", () => {
 
 /* =========================
-   ANIMAÇÃO AO ROLAR A PÁGINA
+        ANIMAÇÃO SCROLL
 ========================= */
 
 const reveals = document.querySelectorAll(".reveal");
@@ -9,9 +10,8 @@ function revealElements(){
     reveals.forEach(el => {
         const windowHeight = window.innerHeight;
         const elementTop = el.getBoundingClientRect().top;
-        const visible = 100;
 
-        if(elementTop < windowHeight - visible){
+        if(elementTop < windowHeight - 100){
             el.classList.add("active");
         }
     });
@@ -31,30 +31,21 @@ question:"O que é Fake News?",
 answers:[
 "Informação falsa divulgada como verdadeira",
 "Notícia científica",
-"Relatório oficial"
+"Livro escolar"
 ],
 correct:0
 },
 {
-question:"Qual a primeira atitude antes de compartilhar uma notícia?",
-answers:[
-"Verificar a fonte",
-"Compartilhar imediatamente",
-"Acreditar no título"
-],
-correct:0
-},
-{
-question:"Fotos podem ser manipuladas?",
+question:"Você deve verificar a fonte antes de compartilhar?",
 answers:[
 "Sim",
 "Não",
-"Sempre verdadeiras"
+"Apenas às vezes"
 ],
 correct:0
 },
 {
-question:"Fake News podem afetar eleições?",
+question:"Imagens podem ser manipuladas?",
 answers:[
 "Sim",
 "Não",
@@ -63,146 +54,20 @@ answers:[
 correct:0
 },
 {
-question:"Uma fonte confiável geralmente tem:",
-answers:[
-"Autoria e referências",
-"Anonimato total",
-"Sem informações"
-],
-correct:0
-},
-{
-question:"Notícias antigas podem ser usadas como se fossem atuais?",
+question:"Fake News podem causar problemas sociais?",
 answers:[
 "Sim",
 "Não",
-"Nunca"
+"Nenhum"
 ],
 correct:0
 },
 {
-question:"O que é mais seguro fazer antes de compartilhar?",
+question:"Qual é a melhor atitude?",
 answers:[
-"Checar outras fontes",
+"Verificar informações",
 "Compartilhar rápido",
-"Ignorar a verificação"
-],
-correct:0
-},
-{
-question:"Fake News podem causar:",
-answers:[
-"Desinformação e prejuízos sociais",
-"Nada",
-"Apenas entretenimento"
-],
-correct:0
-},
-{
-question:"Discursos de ódio devem ser:",
-answers:[
-"Denunciados",
-"Incentivados",
-"Ignorados sempre"
-],
-correct:0
-},
-{
-question:"Qual atitude ajuda a combater Fake News?",
-answers:[
-"Educação digital",
-"Espalhar boatos",
-"Compartilhar sem ler"
-],
-correct:0
-},
-{
-question:"Vídeos na internet podem ser editados?",
-answers:[
-"Sim",
-"Não",
-"Nunca"
-],
-correct:0
-},
-{
-question:"Qual é o maior risco das Fake News?",
-answers:[
-"Manipulação da opinião pública",
-"Entretenimento",
-"Nenhum risco"
-],
-correct:0
-},
-{
-question:"Uma notícia confiável deve ter:",
-answers:[
-"Evidências verificáveis",
-"Opiniões sem base",
-"Apenas títulos chamativos"
-],
-correct:0
-},
-{
-question:"Compartilhar sem verificar pode causar:",
-answers:[
-"Propagação de mentiras",
-"Nenhum problema",
-"Informação correta sempre"
-],
-correct:0
-},
-{
-question:"O que é mais confiável?",
-answers:[
-"Jornal reconhecido",
-"Mensagem de grupo",
-"Perfil anônimo"
-],
-correct:0
-},
-{
-question:"Fake News se espalham principalmente por:",
-answers:[
-"Redes sociais",
-"Livros científicos",
-"Jornais oficiais"
-],
-correct:0
-},
-{
-question:"O que ajuda a identificar Fake News?",
-answers:[
-"Comparar fontes",
-"Acreditar em tudo",
-"Ignorar detalhes"
-],
-correct:0
-},
-{
-question:"Uma emoção forte em uma notícia pode indicar:",
-answers:[
-"Manipulação",
-"Verdade absoluta",
-"Neutralidade"
-],
-correct:0
-},
-{
-question:"Antes de compartilhar devemos:",
-answers:[
-"Pausar e verificar",
-"Enviar rápido",
-"Ignorar dúvida"
-],
-correct:0
-},
-{
-question:"Fake News podem ser perigosas porque:",
-answers:[
-"Influenciam decisões importantes",
-"São engraçadas",
-"Não têm impacto"
+"Ignorar dúvidas"
 ],
 correct:0
 }
@@ -210,11 +75,8 @@ correct:0
 
 
 /* =========================
-        VARIÁVEIS
+        ELEMENTOS
 ========================= */
-
-let currentQuestion = 0;
-let score = 0;
 
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
@@ -224,40 +86,49 @@ const nextBtn = document.getElementById("nextBtn");
 
 
 /* =========================
-     CARREGAR PERGUNTA
+        VARIÁVEIS
+========================= */
+
+let currentQuestion = 0;
+let score = 0;
+
+
+/* =========================
+        CARREGAR QUESTÃO
 ========================= */
 
 function loadQuestion(){
 
-if(!questionEl) return;
+if(!questionEl || !answersEl) return;
 
 const q = quizData[currentQuestion];
 
 questionEl.innerText = q.question;
 answersEl.innerHTML = "";
 
-/* criar botões */
 q.answers.forEach((answer, index) => {
 
 const btn = document.createElement("button");
 btn.classList.add("answer-btn");
 btn.innerText = answer;
 
-btn.addEventListener("click", () => checkAnswer(index));
+btn.onclick = () => checkAnswer(index);
 
 answersEl.appendChild(btn);
 
 });
 
-/* atualizar barra */
+/* barra de progresso */
+if(progressBar){
 progressBar.style.width =
 (currentQuestion / quizData.length) * 100 + "%";
+}
 
 }
 
 
 /* =========================
-      VERIFICAR RESPOSTA
+        VERIFICAR RESPOSTA
 ========================= */
 
 function checkAnswer(index){
@@ -266,27 +137,25 @@ const buttons = document.querySelectorAll(".answer-btn");
 
 buttons.forEach(b => b.disabled = true);
 
-const correctIndex = quizData[currentQuestion].correct;
+const correct = quizData[currentQuestion].correct;
 
-if(index === correctIndex){
-
+if(index === correct){
 buttons[index].classList.add("correct");
 score++;
-
 }else{
-
 buttons[index].classList.add("wrong");
-buttons[correctIndex].classList.add("correct");
-
+buttons[correct].classList.add("correct");
 }
 
+if(scoreText){
 scoreText.innerText = "Pontuação: " + score;
+}
 
 }
 
 
 /* =========================
-     PRÓXIMA PERGUNTA
+        PRÓXIMA
 ========================= */
 
 if(nextBtn){
@@ -296,13 +165,9 @@ nextBtn.addEventListener("click", () => {
 currentQuestion++;
 
 if(currentQuestion < quizData.length){
-
 loadQuestion();
-
 }else{
-
 showResult();
-
 }
 
 });
@@ -311,46 +176,42 @@ showResult();
 
 
 /* =========================
-       RESULTADO FINAL
+        RESULTADO FINAL
 ========================= */
 
 function showResult(){
 
-document.querySelector(".quiz-box").innerHTML = `
+const box = document.querySelector(".quiz-box");
 
+if(!box) return;
+
+box.innerHTML = `
 <h2>🏆 Quiz Finalizado</h2>
-
 <p>Você acertou ${score} de ${quizData.length}</p>
-
-<h3>
-${getLevel()}
-</h3>
-
-<p>
-Parabéns por completar o quiz sobre Fake News!
-</p>
-
+<h3>${getLevel()}</h3>
+<p>Obrigado por participar!</p>
 `;
 
 }
 
 
 /* =========================
-        NÍVEL DO JOGADOR
+        NÍVEL
 ========================= */
 
 function getLevel(){
 
-if(score <= 5) return "🥉 Iniciante";
-if(score <= 12) return "🥈 Investigador";
-if(score <= 17) return "🥇 Especialista";
+if(score <= 2) return "🥉 Iniciante";
+if(score <= 4) return "🥈 Investigador";
+return "🥇 Especialista";
 
-return "🏆 Caçador de Fake News";
 }
 
 
 /* =========================
-     INICIAR QUIZ
+        START
 ========================= */
 
 loadQuestion();
+
+});
