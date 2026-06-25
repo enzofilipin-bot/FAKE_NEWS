@@ -2,48 +2,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const quizData = [
 {
-question:"O que são Fake News?",
+question:"O que é Fake News?",
 answers:[
-"Informações falsas",
-"Jornal científico",
-"Relatório oficial"
+"Informação falsa",
+"Notícia científica",
+"Livro"
 ],
 correct:0
 },
 {
-question:"Devemos verificar fontes?",
-answers:[
-"Sim",
-"Não",
-"Nunca"
-],
+question:"Você deve verificar fontes?",
+answers:["Sim","Não","Nunca"],
 correct:0
 },
 {
-question:"Imagens podem ser manipuladas?",
-answers:[
-"Sim",
-"Não",
-"Sempre verdadeiras"
-],
+question:"Imagens podem ser falsas?",
+answers:["Sim","Não","Sempre verdadeiras"],
 correct:0
 },
 {
-question:"Fake News causam impacto social?",
-answers:[
-"Sim",
-"Não",
-"Nenhum impacto"
-],
+question:"Fake News se espalham rápido?",
+answers:["Sim","Não","Nunca"],
 correct:0
 },
 {
 question:"Melhor atitude online?",
-answers:[
-"Checar informações",
-"Compartilhar rápido",
-"Acreditar em tudo"
-],
+answers:["Checar informações","Compartilhar rápido","Ignorar"],
 correct:0
 }
 ];
@@ -51,76 +35,55 @@ correct:0
 let current = 0;
 let score = 0;
 
-const questionEl = document.getElementById("question");
-const answersEl = document.getElementById("answers");
+const question = document.getElementById("question");
+const answers = document.getElementById("answers");
+const progress = document.getElementById("progressBar");
 const scoreText = document.getElementById("scoreText");
-const progressBar = document.getElementById("progressBar");
 
-function loadQuestion(){
+function load(){
 
 const q = quizData[current];
 
-questionEl.textContent = q.question;
-answersEl.innerHTML = "";
+question.textContent = q.question;
+answers.innerHTML = "";
 
-q.answers.forEach((a, i) => {
+q.answers.forEach((a,i)=>{
 
 const btn = document.createElement("button");
 btn.classList.add("answer-btn");
 btn.textContent = a;
 
-btn.onclick = () => checkAnswer(i);
+btn.onclick = () => {
 
-answersEl.appendChild(btn);
-
-});
-
-progressBar.style.width = (current / quizData.length) * 100 + "%";
-}
-
-function checkAnswer(i){
-
-const buttons = document.querySelectorAll(".answer-btn");
-buttons.forEach(b => b.disabled = true);
-
-const correct = quizData[current].correct;
-
-if(i === correct){
-buttons[i].classList.add("correct");
+if(i === q.correct){
+btn.style.background = "green";
 score++;
 }else{
-buttons[i].classList.add("wrong");
-buttons[correct].classList.add("correct");
+btn.style.background = "red";
 }
 
-scoreText.textContent = "Pontuação: " + score;
+setTimeout(()=>{
 
-setTimeout(() => {
 current++;
 
 if(current < quizData.length){
-loadQuestion();
+load();
 }else{
-showResult();
-}
-}, 800);
-
+answers.innerHTML =
+`<h2>Missão concluída</h2><p>Score: ${score}/${quizData.length}</p>`;
 }
 
-function showResult(){
-document.querySelector(".quiz-box").innerHTML = `
-<h2>Quiz Finalizado</h2>
-<p>Você acertou ${score} de ${quizData.length}</p>
-<h3>${getLevel()}</h3>
-`;
+},600);
+
+};
+
+answers.appendChild(btn);
+
+});
+
+progress.style.width = (current/quizData.length)*100 + "%";
 }
 
-function getLevel(){
-if(score <= 2) return "Iniciante";
-if(score <= 4) return "Intermediário";
-return "Avançado";
-}
-
-loadQuestion();
+load();
 
 });
