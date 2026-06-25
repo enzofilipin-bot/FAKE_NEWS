@@ -1,99 +1,35 @@
-// Animação ao rolar a página
-
-const reveals = document.querySelectorAll(".reveal");
-
-function revealElements() {
-
-    reveals.forEach(element => {
-
-        const windowHeight = window.innerHeight;
-        const elementTop = element.getBoundingClientRect().top;
-        const visible = 100;
-
-        if (elementTop < windowHeight - visible) {
-            element.classList.add("active");
-        }
-
-    });
-
+function entrar() {
+  document.getElementById("alertScreen").style.display = "none";
 }
 
-window.addEventListener("scroll", revealElements);
-revealElements();
+function verificar() {
+  const texto = document.getElementById("inputNews").value.toLowerCase();
+  const resultado = document.getElementById("resultado");
 
+  let pontos = 0;
 
-// Botão modo escuro
+  if (texto.includes("urgente")) pontos++;
+  if (texto.includes("milagre")) pontos++;
+  if (texto.includes("100% garantido")) pontos++;
+  if (texto.includes("cura")) pontos++;
+  if (texto.includes("compartilhe")) pontos++;
 
-const darkButton = document.createElement("button");
+  if (texto.trim() === "") {
+    resultado.innerHTML = "⚠️ Digite uma notícia.";
+    resultado.style.color = "yellow";
+    return;
+  }
 
-darkButton.innerHTML = "🌙";
-darkButton.classList.add("dark-btn");
-
-document.body.appendChild(darkButton);
-
-darkButton.addEventListener("click", () => {
-
-    document.body.classList.toggle("dark-mode");
-
-    if(document.body.classList.contains("dark-mode")){
-        darkButton.innerHTML = "☀️";
-    }else{
-        darkButton.innerHTML = "🌙";
-    }
-
-});
-
-
-// Contador animado
-
-const stats = document.querySelectorAll(".stat h3");
-
-stats.forEach(stat => {
-
-    let start = 0;
-    const end = 100;
-
-    const counter = setInterval(() => {
-
-        start++;
-
-        if(start >= end){
-            clearInterval(counter);
-        }
-
-    },20);
-
-});
-
-
-// Mensagem de conscientização
-
-setTimeout(() => {
-
-    alert(
-        "Antes de compartilhar qualquer informação, verifique a fonte e confirme se ela é confiável."
-    );
-
-}, 3000);
-
-
-// Botão voltar ao topo
-
-const topButton = document.createElement("button");
-
-topButton.innerHTML = "↑";
-topButton.classList.add("dark-btn");
-
-topButton.style.bottom = "90px";
-topButton.style.background = "#2563eb";
-
-document.body.appendChild(topButton);
-
-topButton.addEventListener("click", () => {
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-});
+  if (pontos >= 2) {
+    resultado.innerHTML = "💥 ALERTA MÁXIMO: POSSÍVEL FAKE NEWS DETECTADA!";
+    resultado.style.color = "red";
+  } 
+  else if (pontos === 1) {
+    resultado.innerHTML = "⚠️ Sinais suspeitos encontrados.";
+    resultado.style.color = "orange";
+  } 
+  else {
+    resultado.innerHTML = "✅ Nenhum sinal crítico detectado.";
+    resultado.style.color = "lightgreen";
+  }
+}
